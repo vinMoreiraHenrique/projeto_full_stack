@@ -15,8 +15,9 @@ model Cliente {
   nomeCompleto   String
   email          String    @unique
   telefone       String
+  senha          String    
   dataDeRegistro DateTime  @default(now())
-  contatos       Contato[] 
+  contatos       Contato[]
 }
 
 model Contato {
