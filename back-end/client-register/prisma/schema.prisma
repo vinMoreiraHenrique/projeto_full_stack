@@ -15,7 +15,7 @@ model Cliente {
   nomeCompleto   String
   email          String    @unique
   telefone       String
-  senha          String    
+  senha          String
   dataDeRegistro DateTime  @default(now())
   contatos       Contato[]
 }
@@ -27,6 +27,6 @@ model Contato {
   telefone       String
   dataDeRegistro DateTime @default(now())
 
-  Cliente   Cliente? @relation(fields: [clienteId], references: [id])
+  Cliente   Cliente? @relation(fields: [clienteId], references: [id], onDelete: Cascade)
   clienteId Int?
 }
