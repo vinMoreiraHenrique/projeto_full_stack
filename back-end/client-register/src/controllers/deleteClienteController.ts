@@ -7,17 +7,21 @@ const prisma = new PrismaClient();
 
 const deleteClienteController = (req: Request, res: Response) => {
   const { id } = req.params;
-
   const token = req.headers.authorization;
+
   if (!token) {
     return res.status(401).json({ error: "Não autorizado" });
   }
 
-  const decoded = jwt.verify(token, "your_secret") as JwtPayload;
-  const clientId = decoded.id;
+  try {
+    const decoded = jwt.verify(token, "your_secret") as JwtPayload;
+    const clientId = decoded.id;
 
-  if (Number(id) !== clientId) {
-    return res.status(401).json({ error: "Não autorizado" });
+    if (Number(id) !== clientId) {
+      return res.status(401).json({ error: "Não autorizado" });
+    }
+  } catch (error) {
+    return res.status(401).json({ error: "Token inválido" });
   }
 
   const cliente = prisma.cliente.delete({

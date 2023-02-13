@@ -26,6 +26,6 @@ router.post("/cliente/:id/contato", createClienteContatoController);
 
 router.post("/login", createClienteLoginController);
 
-router.post("/cliente/:id", deleteClienteController)
+router.delete("/cliente/:id", deleteClienteController)
 
 export { router };
